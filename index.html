@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <h1>Closure</h1>
+    <pre>
+    Q1
+        function counter(){
+            var counter = 0;
+
+            function IncreaseCounter() {
+                return counter += 1;
+            };
+
+            return IncreaseCounter;
+        }
+
+    var counter = counter();
+    alert(counter());
+    alert(counter());
+    alert(counter());
+    alert(counter());
+    <br><br>
+    <button onclick="alert(a())">Preview</button>
+
+    Output:
+        4
+    Reason:
+        This concept is called as First class function .The reason output is 4 because we are calling the same instance of object ,also  the variable counter declared through var  
+        is accessed which is in parent function
+
+        <br><br>
+    Q2
+        let count = 0;
+    (function () {
+        if (count === 0) {
+            let count = 1;
+            console.log(count); // What is logged?
+        }
+        console.log(count); // What is logged?
+        })();
+        <br>
+        Output:
+            1
+            0
+        Reason:
+            The count variable inside if has block scope that can be accessed only inside {} bracket .The count variable accessed inside function, outisde if statement is accessing 
+            global variable count which has global scope.Also this type of function is called  anonymous function 
+
+            <br><br>
+    Q3
+        for (var i = 0; i &lt; 3; i++) {
+            setTimeout(function log() {
+            console.log(i); // What is logged?
+            }, 1000);
+        }
+        <br>
+        Output:
+            3
+            3
+            3
+        Reason:
+            setTimeout function delays the execution by speciifed time in the 2nd argument.The output 3 in the all the  iteration  because var has global scope and when the function is
+            executed it will print the current  value of that variable  
+            <br><br>
+    Q4  Write a code to calculate area of a rectangle using inner function. In this case outer function should accept parameter length and inner function should accept parameter breadth.
+
+        function area_ofrectange(length){
+        
+            function areaofrectangle2(breadth){
+                return length*breadth
+            }
+        
+            return areaofrectangle2
+            }      
+
+        <br><br>
+    Q5 Take a variable in outer function and create an inner function to increase the counter every time it is called
+
+        function counter(){
+            var count = 0;
+        
+            function increaseCount() {
+                return count += 1;
+            };
+        
+            return increaseCount;
+        }
+        <br><br>
+    Q6 Print Output
+
+        var a = 12;
+        (function () {
+        alert(a);
+        })();
+
+        Output:
+            12
+        Reason:
+            The variable a has global scope
+
+    Q7 
+        var a = 10;
+        var x = (function () {
+        var a = 12;
+        return function () {
+            console.log(a);
+        };
+        })();
+        x();
+
+        Output:
+            12
+        Reason:
+            Function scope has more priority than global scope
+
+    Q8
+        var globalVar = "xyz";
+
+        (function outerFunc(outerArg) {
+            var outerVar = 'a';
+            
+            (function innerFunc(innerArg) {
+            var innerVar = 'b';
+            
+            console.log(
+                "outerArg = " + outerArg + "\n" +
+                "innerArg = " + innerArg + "\n" +
+                "outerVar = " + outerVar + "\n" +
+                "innerVar =" + innerVar + "\n" +
+                "globalVar ="  + globalVar);
+            
+            })(456);
+        })(123);
+
+        Output:
+            outerArg = 123
+            innerArg = 456
+            outerVar = a
+            innerVar =b
+            globalVar =xyz
+        
+        Reason:
+            Anonymous function is nested inside a anonymous function and hence its execution 
+    
+        </pre>
+</body>
+<script src="./scripts.js"></script>
+</html>
